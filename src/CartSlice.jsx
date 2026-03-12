@@ -6,14 +6,32 @@ export const CartSlice = createSlice({
     items: [], // Initialize items as an empty array
   },
   reducers: {
+    //Adds a new item to the shoping cart
     addItem: (state, action) => {
-    
+        const {name, image, cost} = action.payload; //Gets the products infromation from the action payload
+        const currentItem = state.items.find(item.name === name);
+        if(currentItem){
+            currentItem.quantity++;
+        }
+        else{
+            state.items.push({name,image,cost,quantity:1});
+        }
     },
-    removeItem: (state, action) => {
-    },
-    updateQuantity: (state, action) => {
 
-    
+    //Completly deletes the item from the shopping cart by using its name as the key
+    removeItem: (state, action) => {
+        state.items = state.items.filter(item => item.name !== action.payload);
+    },
+
+    //Updates the current quntity of the item in the shopping cart
+    updateQuantity: (state, action) => {
+        //Gets the products infromation from the action payload
+        const {name,quantity} = action.payload;
+        //This section is to check if the item exists, if it does the item is updated
+        const itemToUpdate = state.items.find(item => item.name === name);
+        if(itemToUpdate){
+            itemToUpdate.quantity = quantity;
+        }
     },
   },
 });
