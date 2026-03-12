@@ -232,7 +232,8 @@ function ProductList({ onHomeClick }) {
         fontSize: '30px',
         textDecoration: 'none',
     }
-
+    //Used to Track the current state of the product
+    const [addedToCart, setAddedToCart] = useState({});
     const handleHomeClick = (e) => {
         e.preventDefault();
         onHomeClick();
@@ -251,6 +252,16 @@ function ProductList({ onHomeClick }) {
     const handleContinueShopping = (e) => {
         e.preventDefault();
         setShowCart(false);
+    };
+
+    //adds a plant to the shopping cart
+    const handleAddToCart = (plant) => {
+        dispatch(addItem(plant));
+        
+        setAddedToCart((prevState) => ({
+            ...prevState, // Maintains the previous states of the entries
+            [plant.name]: true, //Sets the current product's name a key with the value true
+        }));
     };
     return (
         <div>
@@ -292,6 +303,12 @@ function ProductList({ onHomeClick }) {
                                     <div className="product-title">{plant.name}</div>
                                     <div className="product-title">{plant.description}</div>
                                     <div className="product-title">{plant.price}</div>
+                                    <button
+                                        className="product-button"
+                                        onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
+                                    >
+                                        Add to Cart
+                                    </button>
                                 </div>    
                             ))}
                         </div>
