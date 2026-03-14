@@ -8,6 +8,7 @@ function ProductList({ onHomeClick }) {
     const [addedToCart, setAddedToCart] = useState({});
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+    const [buttonText, setButtonText] = useState('Add To Cart');
     const dispatch = useDispatch();
     const plantsArray = [
         {
@@ -265,6 +266,7 @@ function ProductList({ onHomeClick }) {
             ...prevState, // Maintains the previous states of the entries
             [product.name]: true, //Sets the current product's name a key with the value true
         }));
+        setButtonText('Added To Cart');
     };
     return (
         <div>
@@ -310,7 +312,7 @@ function ProductList({ onHomeClick }) {
                                         className="product-button"
                                         onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
                                     >
-                                        Add to Cart
+                                        {buttonText}
                                     </button>
                                 </div>    
                             ))}
