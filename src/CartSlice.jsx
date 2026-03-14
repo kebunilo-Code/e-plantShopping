@@ -8,13 +8,14 @@ export const CartSlice = createSlice({
   reducers: {
     //Adds a new item to the shoping cart
     addItem: (state, action) => {
+        console.log("I am in addItem");
         const {name, image, cost} = action.payload; //Gets the products infromation from the action payload
-        const currentItem = state.items.find(item.name === name);
+        const currentItem = state.items.find(item => item.name === name);
         if(currentItem){
             currentItem.quantity++;
         }
         else{
-            state.items.push({name,image,cost,quantity:1});
+            state.items.push({ name, image, cost, quantity: 1});
         }
     },
 
