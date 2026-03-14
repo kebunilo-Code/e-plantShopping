@@ -34,9 +34,14 @@ export const CartSlice = createSlice({
             itemToUpdate.quantity = quantity;
         }
     },
+
+    toggleItemSelection: (state, action) => {
+        console.log("I am in toggleItemSelection");
+        state[action.payload].selected = !state[action.payload].selected;
+    },
   },
 });
 
-export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity, toggleItemSelection } = CartSlice.actions;
 
 export default CartSlice.reducer;
