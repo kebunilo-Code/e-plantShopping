@@ -293,11 +293,21 @@ function ProductList({ onHomeClick }) {
         //Needed dispatch to work
         if(product.selected === false){
             dispatch(addItem(product));
-            product.selected = true
+            console.log(product);
+            dispatch(toggleItemSelection(product));
             setAddedToCart((prevState) => ({
                 ...prevState, // Maintains the previous states of the entries
                 [product.name]: true, //Sets the current product's name a key with the value true
             }));
+        }
+    };
+
+    const changeButtonText = (product) => {
+        if(product.selected === false){
+            return "Add to Cart"
+        }
+        else{
+            return "Added to Cart"
         }
     };
     return (
@@ -344,7 +354,7 @@ function ProductList({ onHomeClick }) {
                                         className="product-button"
                                         onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
                                     >
-                                        {(plant.selected === false) ? "Add to Cart":"Added to Cart" }
+                                        {changeButtonText(plant)}
                                     </button>
                                 </div>    
                             ))}

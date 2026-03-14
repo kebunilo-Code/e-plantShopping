@@ -36,8 +36,7 @@ export const CartSlice = createSlice({
     },
 
     toggleItemSelection: (state, action) => {
-        console.log("I am in toggleItemSelection");
-        state[action.payload].selected = !state[action.payload].selected;
+        action.payload.selected = !action.payload.selected;
     },
   },
 });
