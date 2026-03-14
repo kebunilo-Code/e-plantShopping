@@ -18,25 +18,50 @@ const CartItem = ({ onContinueShopping }) => {
     });
     return totalCost;
   };
-
+  //Calls the onContinueShopping method passed down from the parent component
   const handleContinueShopping = (e) => {
-   
+   dispatch(onContinueShopping(e));
   };
 
-
+  const handleCheckoutShopping = (e) => {
+    alert('To be added in the future');
+  };
 
   const handleIncrement = (item) => {
+    if(item) {
+        let newQunatity = item.quantity + 1;
+        dispatch(updateQuantity({name:item.name, quantity: newQunatity}));
+    }
   };
 
+  //This function will either call the updateQunatitiy Funtioin of the removeItem Function
   const handleDecrement = (item) => {
-   
+    //Acts as a seperate varaible for item.quntitiy
+    let newQunatity = item.quantity;
+    //Calls the dispatch if the item.qunatiy is greater then one
+    if(item.quantity > 1){
+        newQunatity--;
+        dispatch(updateQuantity({name:item.name, quantity: newQunatity}));
+    }
+    //Calls the dispatch if the item.quantity is one
+    else if(item.quantity === 1){
+        dispatch(removeItem(item));
+    }
   };
-
+  //Calls the removeItem Function
   const handleRemove = (item) => {
+    dispatch(removeItem(item));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    let totalCost = 0;
+    if (item){
+        //Converts The string price into an Integer
+        let intCost = parseFloat(item.cost.substring(1))
+        totalCost += intCost * item.quantity;
+    }
+    return totalCost;
   };
 
   return (
