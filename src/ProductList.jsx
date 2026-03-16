@@ -8,7 +8,6 @@ function ProductList({ onHomeClick }) {
     const [addedToCart, setAddedToCart] = useState({});
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    
     const dispatch = useDispatch();
     const plantsArray = [
         {
@@ -302,14 +301,6 @@ function ProductList({ onHomeClick }) {
         }
     };
 
-    const changeButtonText = (product) => {
-        if(product.selected === false){
-            return "Add to Cart"
-        }
-        else{
-            return "Added to Cart"
-        }
-    };
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -353,8 +344,9 @@ function ProductList({ onHomeClick }) {
                                     <button
                                         className="product-button"
                                         onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
+                                        disabled={true}
                                     >
-                                        {changeButtonText(plant)}
+                                        Add to Cart
                                     </button>
                                 </div>    
                             ))}
