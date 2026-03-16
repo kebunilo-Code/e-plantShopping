@@ -9,7 +9,7 @@ function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const dispatch = useDispatch();
-    const plantsArray = [
+    const [plantsArray, setPlantsArray] = useState([
         {
             category: "Air Purifying Plants",
             plants: [
@@ -245,7 +245,7 @@ function ProductList({ onHomeClick }) {
                 }
             ]
         }
-    ];
+    ]);
     const styleObj = {
         backgroundColor: '#4CAF50',
         color: '#fff!important',
@@ -289,16 +289,24 @@ function ProductList({ onHomeClick }) {
 
     //adds a plant to the shopping cart
     const handleAddToCart = (product) => {
+        const updatedState = plantsArray.map(plant => {
+            console.log(plant.name)
+            //if(plant.name === product.name){
+                return{ ...plant, selected: true}
+            //}
+            return plant;
+        });
+        setPlantsArray(updatedState);
+        console.log(product)
         //Needed dispatch to work
-        if(product.selected === false){
-            dispatch(addItem(product));
-            console.log(product);
-            dispatch(toggleItemSelection(product));
-            setAddedToCart((prevState) => ({
-                ...prevState, // Maintains the previous states of the entries
-                [product.name]: true, //Sets the current product's name a key with the value true
-            }));
-        }
+        dispatch(addItem(product));
+        //dispatch(toggleItemSelection(product));
+        setAddedToCart((prevState) => ({
+            ...prevState, // Maintains the previous states of the entries
+            [product.name]: true, //Sets the current product's name a key with the value true     
+        }));
+        
+        
     };
 
     return (
@@ -344,9 +352,8 @@ function ProductList({ onHomeClick }) {
                                     <button
                                         className="product-button"
                                         onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
-                                        disabled={true}
                                     >
-                                        Add to Cart
+                                        {plant.selected ? 'Added to Cart' : 'Add to Cart'}
                                     </button>
                                 </div>    
                             ))}
