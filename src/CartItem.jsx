@@ -45,12 +45,12 @@ const CartItem = ({ onContinueShopping }) => {
     }
     //Calls the dispatch if the item.quantity is one
     else if(item.quantity === 1){
-        dispatch(removeItem(item));
+        dispatch(removeItem(item.name));
     }
   };
   //Calls the removeItem Function
   const handleRemove = (item) => {
-    dispatch(removeItem(item));
+    dispatch(removeItem(item.name));
   };
 
   // Calculate total cost based on quantity for an item

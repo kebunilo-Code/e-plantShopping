@@ -20,7 +20,7 @@ export const CartSlice = createSlice({
 
     //Completly deletes the item from the shopping cart by using its name as the key
     removeItem: (state, action) => {
-        state.items = state.items.filter(item => item.name !== action.payload);
+        
     },
 
     //Updates the current quntity of the item in the shopping cart
