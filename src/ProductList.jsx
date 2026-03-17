@@ -340,8 +340,10 @@ function ProductList({ onHomeClick }) {
                 <div className="product-grid">
                     {plantsArray.map((category,index) => ( //allows the function to go through each category of the plantArray
                     <div key = {index}>
-                        <h1>
+                        <h1 style={{textAlign: 'center'}}>
+                            <div>______________________</div>
                             <div>{category.category}</div> {/*This displays the catagory for each item*/}
+                            <div>______________________</div>
                         </h1>
                         <div className="product-list">
                             {category.plants.map((plant, plantIndex) => ( //Allows the funtion to go though each of the individual plant 
