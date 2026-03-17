@@ -23,10 +23,12 @@ const CartItem = ({ onContinueShopping }) => {
    dispatch(onContinueShopping(e));
   };
 
+  //Provides a message when clicked
   const handleCheckoutShopping = (e) => {
     alert('To be added in the future');
   };
 
+  //Increase the quantity shown in the cart
   const handleIncrement = (item) => {
     if(item) {
         let newQunatity = item.quantity + 1;
