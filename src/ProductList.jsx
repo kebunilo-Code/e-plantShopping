@@ -284,7 +284,7 @@ function ProductList({ onHomeClick }) {
 
     const handleContinueShopping = (e) => {
         e.preventDefault();
-        setShowCart(false);
+        setShowCart(false);//shows a list shopping cart items from CartItem
     };
 
     //adds a plant to the shopping cart
@@ -302,6 +302,8 @@ function ProductList({ onHomeClick }) {
 
     //Calculates the amount of diffrent items currently selected by pulling ifromation form the cart, located in CartSlice
     const calculateTotalQunatity = () =>{
+        //Checks if there are items in the cart, if there are items in the cart the total for the quntity will equal the number
+        //of diffrent items, else the total will be zero, both of which will be returned to the component that called it.
         return cartItems ? cartItems.reduce((total, item) => total + item.quantity, 0) : 0;
     };
     return (
@@ -324,14 +326,11 @@ function ProductList({ onHomeClick }) {
                     <div> 
                         <a href="#" onClick={(e) => handleCartClick(e)} style={styleA}>
                             <h1 className='cart'>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68">
-                                    <rect width="156" height="156" fill="none"></rect>
-                                    <circle cx="80" cy="216" r="12"></circle>
-                                    <circle cx="184" cy="216" r="12"></circle>
-                                    <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path>
-                                </svg>
                                 {/*The class cart-quantity will display the number of currently selected items next to the shoping cart image */}
                                 <span className="cart-quantity">{calculateTotalQunatity()}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68">
+                                    <rect width="156" height="156" fill="none"></rect><circle cx="80" cy="216" r="12"></circle><circle cx="184" cy="216" r="12"></circle><path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path>
+                                </svg>   
                             </h1>
                         </a>
                     </div>
@@ -358,7 +357,7 @@ function ProductList({ onHomeClick }) {
                                     <div className="product-description">{plant.description}</div>
                                     <div className="product-cost">{plant.cost}</div>
                                     <button
-                                        className= {addedToCart[plant.name] ? "product-button.added-to-cart" : "product-button"}
+                                        className= {addedToCart[plant.name] ? "product-button added-to-cart" : "product-button"}// space needed to access second class
                                         onClick={() => handleAddToCart(plant)} // the button will call  handleAddToCart when clicked
                                         disabled={!!addedToCart[plant.name]}
                                     >
