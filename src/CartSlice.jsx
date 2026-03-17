@@ -20,7 +20,8 @@ export const CartSlice = createSlice({
 
     //Completly deletes the item from the shopping cart by using its name as the key
     removeItem: (state, action) => {
-        
+        console.log("i am in removeItem")
+        state.items = state.items.filter(item => item.name !== action.payload);
     },
 
     //Updates the current quntity of the item in the shopping cart
@@ -34,12 +35,9 @@ export const CartSlice = createSlice({
         }
     },
 
-    toggleItemSelection: (state, action) => {
-        action.payload.selected = !action.payload.selected;
-    },
   },
 });
 
-export const { addItem, removeItem, updateQuantity, toggleItemSelection } = CartSlice.actions;
+export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
 
 export default CartSlice.reducer;
